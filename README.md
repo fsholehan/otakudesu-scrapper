@@ -22,7 +22,7 @@ Tentu ini di terminal ya!
 
 Berikut adalah endpoint untuk otakudesu scrapper:
 
-## url/api/anime/v1/ongoing
+## {url}/api/anime/v1/ongoing
 
 Endpoint tadi akan menghasilkan list anime yang masih `ongoing`.
 
@@ -42,7 +42,7 @@ Result:
 
 ```
 
-## url/api/anime/v1/completed
+## {url}/api/anime/v1/completed
 
 Endpoint tadi akan menghasilkan list anime yang masih `completed`.
 
@@ -60,4 +60,40 @@ Result:
     rating: ....,
   ]
 
+```
+
+## {url}/api/anime/v1/info/?name={slug}
+
+Untuk endpoint ini akan memberikan informasi soal anime tersebut.
+
+example: `/api/anime/v1/info/?name=op-sub-indo`
+
+Result;
+
+```yaml
+  statusCode: 200,
+  status: 'OK',
+  data: {
+    imgUrl: ...,
+    title: ...,
+    slug: ...,
+    description: ...,
+    first_episode: {
+      episode: ...,
+      slug: ...,
+    },
+    last_episode: {
+      episode: ...,
+      slug: ...,
+    },
+    info: [...],
+    episodes: [
+      {
+        uri: ...,
+        eps: ...,
+        slug: ..,
+      },
+      ...
+    ]
+  }
 ```
