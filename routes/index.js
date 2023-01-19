@@ -1,11 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const animeController = require("../controllers/animes");
+const animesController = require("../controllers/animes");
 
 // Get ongoing Anime
-router.get("/ongoing", animeController.ongoingAnimes);
+router.get("/ongoing", animesController.ongoingAnimes);
 
-// Get ongoing Anime
-router.get("/completed", animeController.completedAnimes);
+// Get completed Anime
+router.get("/completed", animesController.completedAnimes);
+
+//Get anime info
+router.get("/info", animesController.animesInfo);
 
 module.exports = router;

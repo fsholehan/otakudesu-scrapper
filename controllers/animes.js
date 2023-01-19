@@ -72,3 +72,53 @@ exports.completedAnimes = async (req, res) => {
     });
   }
 };
+
+exports.animesInfo = async (req, res) => {
+  const { name } = req.query;
+  try {
+    const response = await axios.get(`${base_url}/anime/${name}`);
+    const $ = cheerio.load(response.data);
+
+    const episodes = $(".episodelist ")
+      .eq(1)
+      .find("ul li span a")
+      .map((i, el) => {
+        return {
+          uri: $(el).attr("href"),
+          eps: $(el).text(),
+          slug: $(el).attr("href").split("/")[4],
+        };
+      })
+      .get();
+    const info = $(".infozin .infozingle p span")
+      .map((i, el) => $(el).text())
+      .get();
+    res.json({
+      statusCode: 200,
+      status: "OK",
+      data: {
+        imgUrl: $("#venkonten .venser .fotoanime img").attr("src"),
+        title: $("#venkonten .venser .jdlrx h1").text().trim(),
+        slug: name,
+        description: $("#venkonten .venser .sinopc p").first().text(),
+        rating: $(".rating strong").text().split(" ")[1],
+        first_episode: {
+          episode: episodes[episodes.length - 1].eps,
+          slug: episodes[episodes.length - 1].slug,
+        },
+        last_episode: {
+          episode: episodes[0].eps,
+          slug: episodes[0].slug,
+        },
+        info,
+        episodes,
+      },
+    });
+  } catch (error) {
+    res.json({
+      status: error.status,
+      code: error.code,
+      message: error.message,
+    });
+  }
+};
