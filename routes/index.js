@@ -11,4 +11,7 @@ router.get("/completed", animesController.completedAnimes);
 //Get anime info
 router.get("/info", animesController.animesInfo);
 
+// get anime data
+router.get("/watch", animesController.animeWatch);
+
 module.exports = router;

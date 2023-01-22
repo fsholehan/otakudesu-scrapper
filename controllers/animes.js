@@ -122,3 +122,46 @@ exports.animesInfo = async (req, res) => {
     });
   }
 };
+
+exports.animeWatch = async (req, res) => {
+  const { slug } = req.query;
+  try {
+    const response = await axios.get(`${base_url}/episode/${slug}`);
+    const $ = cheerio.load(response.data);
+
+    const episodes = $(".keyingpost li a")
+      .map((i, el) => {
+        return {
+          uri: $(el).attr("href"),
+          eps: $(el).text(),
+          slug: $(el).attr("href").split("/")[4],
+        };
+      })
+      .get();
+
+    res.json({
+      statusCode: 200,
+      status: "OK",
+      data: {
+        title: $("#venkonten .venser .venutama h1").text(),
+        video_uri: $(".player-embed").find("iframe").attr("src"),
+        thumbnail: $(".cukder img").attr("src"),
+        first_episode: {
+          episode: episodes[episodes.length - 1].eps,
+          slug: episodes[episodes.length - 1].slug,
+        },
+        last_episode: {
+          episode: episodes[0].eps,
+          slug: episodes[0].slug,
+        },
+        episodes,
+      },
+    });
+  } catch (error) {
+    res.json({
+      status: error.status,
+      code: error.code,
+      message: error.message,
+    });
+  }
+};

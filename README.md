@@ -68,7 +68,7 @@ Untuk endpoint ini akan memberikan informasi soal anime tersebut.
 
 example: `/api/anime/v1/info/?name=op-sub-indo`
 
-Result;
+Result:
 
 ```yaml
   statusCode: 200,
