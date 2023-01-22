@@ -18,11 +18,15 @@ npm start
 
 Tentu ini di terminal ya!
 
+server berjalan di PORT `8000`.
+
+`localhost:8000`.
+
 # Endpoint API
 
 Berikut adalah endpoint untuk otakudesu scrapper:
 
-## {url}/api/anime/v1/ongoing
+### {url}/api/anime/v1/ongoing
 
 Endpoint tadi akan menghasilkan list anime yang masih `ongoing`.
 
@@ -42,7 +46,7 @@ Result:
 
 ```
 
-## {url}/api/anime/v1/completed
+### {url}/api/anime/v1/completed
 
 Endpoint tadi akan menghasilkan list anime yang masih `completed`.
 
@@ -62,7 +66,7 @@ Result:
 
 ```
 
-## {url}/api/anime/v1/info/?name={slug}
+### {url}/api/anime/v1/info/?name={slug}
 
 Untuk endpoint ini akan memberikan informasi soal anime tersebut.
 
@@ -87,6 +91,40 @@ Result:
       slug: ...,
     },
     info: [...],
+    episodes: [
+      {
+        uri: ...,
+        eps: ...,
+        slug: ..,
+      },
+      ...
+    ]
+  }
+```
+
+### {url}/api/anime/v1/watch/?slug={slug}
+
+Untuk endpoint ini akan memberikan informasi soal data episode beserta link stream anime tersebut.
+
+example: `/api/anime/v1/watch/?slug=wpoiec-episode-1047-sub-indo`
+
+Result:
+
+```yaml
+  statusCode: 200,
+  status: 'OK',
+  data: {
+    title: ...,
+    video_uri: ...,
+    thumbnail: ...,
+    first_episode: {
+      episode: ...,
+      slug: ...,
+    },
+    last_episode: {
+      episode: ...,
+      slug: ...,
+    },
     episodes: [
       {
         uri: ...,
