@@ -48,7 +48,7 @@ Result:
 
 ### {url}/api/anime/v1/completed
 
-Endpoint tadi akan menghasilkan list anime yang masih `completed`.
+Endpoint tadi akan menghasilkan list anime yang sudah `completed`.
 
 Result:
 
